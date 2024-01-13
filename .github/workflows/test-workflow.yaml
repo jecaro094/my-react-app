@@ -69,7 +69,7 @@ jobs:
             --version-label $GITHUB_SHA \
             --process \
             --auto-create-application \
-            --source-bundle "S3Bucket=$GITHUB_REPOSITORY,S3Key=$GITHUB_REPOSITORY/$GITHUB_SHA.zip"
+            --source-bundle 
           aws elasticbeanstalk update-environment \
             --application-name ${{ secrets.BEANSTALK_APP_NAME }} \
             --environment-name ${{ secrets.BEANSTALK_ENV_NAME }} \
