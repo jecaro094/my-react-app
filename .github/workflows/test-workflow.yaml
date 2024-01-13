@@ -68,8 +68,7 @@ jobs:
             --application-name ${{ secrets.BEANSTALK_APP_NAME }} \
             --version-label $GITHUB_SHA \
             --process \
-            --auto-create-application \
-            --source-bundle 
+            --auto-create-application
           aws elasticbeanstalk update-environment \
             --application-name ${{ secrets.BEANSTALK_APP_NAME }} \
             --environment-name ${{ secrets.BEANSTALK_ENV_NAME }} \
