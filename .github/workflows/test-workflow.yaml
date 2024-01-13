@@ -64,13 +64,13 @@ jobs:
 
       - name: Deploy to AWS Elastic Beanstalk
         run: |
-        aws elasticbeanstalk create-application-version \
-          --application-name ${{ secrets.BEANSTALK_APP_NAME }} \
-          --version-label $GITHUB_SHA \
-          --process \
-          --auto-create-application \
-          --source-bundle "S3Bucket=$GITHUB_REPOSITORY,S3Key=$GITHUB_REPOSITORY/$GITHUB_SHA.zip"
-        aws elasticbeanstalk update-environment \
-          --application-name ${{ secrets.BEANSTALK_APP_NAME }} \
-          --environment-name ${{ secrets.BEANSTALK_ENV_NAME }} \
-          --version-label $GITHUB_SHA
+          aws elasticbeanstalk create-application-version \
+            --application-name ${{ secrets.BEANSTALK_APP_NAME }} \
+            --version-label $GITHUB_SHA \
+            --process \
+            --auto-create-application \
+            --source-bundle "S3Bucket=$GITHUB_REPOSITORY,S3Key=$GITHUB_REPOSITORY/$GITHUB_SHA.zip"
+          aws elasticbeanstalk update-environment \
+            --application-name ${{ secrets.BEANSTALK_APP_NAME }} \
+            --environment-name ${{ secrets.BEANSTALK_ENV_NAME }} \
+            --version-label $GITHUB_SHA
