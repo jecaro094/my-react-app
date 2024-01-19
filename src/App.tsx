@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import BarChart from './BarChart'; // adjust the path based on your file structure
+import Home from './components/Home';
+import BarChart from './components/BarChart'; // adjust the path based on your file structure
 
 
 const App: React.FC = () => {
@@ -32,14 +33,8 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {data ? (
-        <p>Data from FastAPI: {data}</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        <p>Loading...</p>
-      )}
-      <BarChart data={data} />
+      <Home />
+      {/* <BarChart data={data} /> */}
     </div>
   );
 };
