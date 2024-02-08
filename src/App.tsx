@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Home from './components/Home';
 import BarChart from './components/BarChart'; // adjust the path based on your file structure
+import NavBar from './components/NavBar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const App: React.FC = () => {
@@ -11,7 +13,7 @@ const App: React.FC = () => {
   const AWS_URL = 'http://beanstalk-app2-env.eba-2mgkj2d6.eu-west-2.elasticbeanstalk.com';
   const LOCAL_URL = 'http://127.0.0.1';
 
-  const url = AWS_URL;
+  const url = LOCAL_URL;
 
   useEffect(() => {
     const fetchData = async (p: number[]) => {
@@ -32,10 +34,16 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <Home />
-      {/* <BarChart data={data} /> */}
-    </div>
+    <Router>
+      <div>
+        <NavBar />
+        <Routes>
+          <Route path="/"  element={<Home />} />
+          <Route path="/chart"  element={<BarChart data={data} /> } />
+        {/* <BarChart data={data} /> */}
+        </Routes>
+      </div>
+    </Router>
   );
 };
 

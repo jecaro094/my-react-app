@@ -17,7 +17,7 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
         {
           label: 'Chart Data',
           data: data,
-          backgroundColor: 'rgba(75,192,192,0.2)',
+          backgroundColor: 'rgb(167, 233, 226)',
           borderColor: 'rgba(75,192,192,1)',
           borderWidth: 1,
         },
@@ -32,7 +32,9 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
     },
   };
 
-  return <Bar data={chartData} options={chartOptions} />;
+  return (
+  <Bar data={chartData} options={chartOptions} />
+  );
 };
 
 export default BarChart;
