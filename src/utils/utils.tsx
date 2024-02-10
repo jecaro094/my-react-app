@@ -1,10 +1,11 @@
 
 const API_PORT = '80'
-const API_PATH = 'weather'
-const API_HOST = '127.0.0.1'
+const API_PATH = '/weather'
 
-const AWS_URL = 'http://beanstalk-app2-env.eba-2mgkj2d6.eu-west-2.elasticbeanstalk.com';
-const LOCAL_URL = 'http://127.0.0.1';
+const AWS_HOST = 'Python-app-1-env.eba-yvhiu7pc.eu-west-2.elasticbeanstalk.com';
+const LOCAL_HOST = '127.0.0.1';
+
+const API_HOST = AWS_HOST;
 
 interface UrlParams {
     protocol: string;
@@ -46,7 +47,7 @@ function buildCustomUrl(params: UrlParams): string {
         protocol: 'http',
         port: API_PORT,
         domain: API_HOST,
-        path: '/weather',
+        path: API_PATH,
         queryParams: [
           { key: 'city_name', value: city_name },
         ],
