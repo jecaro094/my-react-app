@@ -2,24 +2,23 @@ import React, {useState, useEffect, useContext} from 'react';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { Dropdown } from './Dropdown';
-import { get_url } from '../utils/utils';
+import { get_url, DROPDOWN_OPTIONS } from '../utils/utils';
+
 
 interface BarChartProps {
   // data: number[] | null;
 }
-
-
 var p: number[];
 
-
-const dropdownOptions = ['London', 'Seville', 'Malaga', 'Madrid', 'Barcelona'];
 
 const BarChart: React.FC<BarChartProps> = ({  }) => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<string>('');
   const [data={}, setData] = useState<number[] | null>(null);
+  const [image='', setImage] = useState<string | undefined>(undefined);
+  const [audio='', setAudio] = useState<string | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
 
-  var url= get_url(selectedDropdownValue)
+  var url = get_url(selectedDropdownValue)
 
   useEffect(() => {
     const fetchData = async (p: number[]) => {
@@ -31,8 +30,10 @@ const BarChart: React.FC<BarChartProps> = ({  }) => {
         }
 
         const result = await response.json();
-        console.log('main: ',result.main)
-        setData(result.main);
+        console.log('stats: ',result.stats)
+        setData(result.stats);
+        setImage(result.sprite);
+        setAudio(result.audio);
       } catch (err) {
       }
     };
@@ -40,15 +41,11 @@ const BarChart: React.FC<BarChartProps> = ({  }) => {
     fetchData(p);
   }, [selectedDropdownValue]);
 
-    // console.log(`Data: ${data}`)
-
    if (data === null) {
-      // Handle the case where data is null, e.g., show a loading indicator or an error message
       return <div>Loading...</div>;
     }
     var chartData = {
       labels: Object.entries(data).map(([key, value], index) => `${key}`),
-      // labels: data.map((_, index) => `Label ${index + 1}`),
       datasets: [
         {
           label: 'Chart Data',
@@ -64,6 +61,7 @@ const BarChart: React.FC<BarChartProps> = ({  }) => {
     scales: {
       y: {
         beginAtZero: true,
+        max: 180,
       },
     },
   };
@@ -75,9 +73,11 @@ const BarChart: React.FC<BarChartProps> = ({  }) => {
   
   return (
   <div>
-    <h1>React Dropdown Example</h1>
-    <Dropdown options={dropdownOptions} onSelect={handleDropdownSelect} />
-    <Bar data={chartData} options={chartOptions} />
+    <h1>Pokemon stats example</h1>
+    <Dropdown options={DROPDOWN_OPTIONS} onSelect={handleDropdownSelect} />
+    <p><img src={image} alt="Pokemon image" /></p>
+
+    <Bar data={chartData} options={chartOptions}></Bar>
   </div>
   );
 };
