@@ -1,33 +1,32 @@
 /* NavBar.css */
 .navbar {
-    background-color: #677ab4;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .nav-links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .nav-link {
-    color: white;
-    text-decoration: none;
-    margin-right: 20px;
-    font-size: 1rem;
-  }
-  
-  .nav-link:hover {
-    border-bottom: 2px solid white;
-  }
-  
+  background-color: #677ab4;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 1rem;
+}
+
+.nav-link:hover {
+  border-bottom: 2px solid white;
+}
