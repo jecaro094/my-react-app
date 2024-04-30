@@ -1,0 +1,34 @@
+/* Style the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Style table header */
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+}
+
+/* Style table rows */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Style table cells */
+td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+/* Style table cell hover */
+td:hover {
+  background-color: #f0f0f0;
+}

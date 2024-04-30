@@ -12,7 +12,6 @@ export const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
   )
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(`Selected option in DROPDOWN: ${selectedOption}`)
     const newValue = event.target.value
     setSelectedOption(newValue)
     onSelect(newValue)

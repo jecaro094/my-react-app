@@ -3,5 +3,5 @@ export interface UrlParams {
   port: string
   domain: string
   path?: string
-  queryParams?: Array<{ key: string; value: string }>
+  payload?: Record<string, string | number>
 }

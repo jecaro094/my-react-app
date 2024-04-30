@@ -15,34 +15,23 @@ const DROPDOWN_OPTIONS_WEATHER = [
   'Madrid',
   'Barcelona',
 ]
-const DROPDOWN_OPTIONS_POKEMON = [
-  'Jirachi',
-  'Venusaur',
-  'Charizard',
-  'Alakazam',
-  'Mewtwo',
-  'Rayquaza',
-  'Pikachu',
-  'Latias',
-  'Latios',
-  'Mew',
-]
+const DROPDOWN_OPTIONS_POKEMON = ['127', '2', '63']
 
 export const DROPDOWN_OPTIONS = DROPDOWN_OPTIONS_POKEMON
 
-type QueryParam = UrlParams['queryParams']
+// type QueryParam = UrlParams['queryParams']
 
 // Builds custom URL based on url params, given by parameter.
 function buildCustomUrl(params: UrlParams): string {
-  const { protocol, port, domain, path = '/', queryParams = [] } = params
+  const { protocol, port, domain, path = '/', payload = {} } = params
 
   // Construct the base URL
   let url = `${protocol}://${domain}:${port}${path}`
 
   // Append query parameters if any
-  const queryString = queryParams
+  const queryString = Object.entries(payload)
     .map(
-      ({ key, value }) =>
+      ([key, value]) =>
         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
     )
     .join('&')
@@ -54,17 +43,17 @@ function buildCustomUrl(params: UrlParams): string {
   return url
 }
 
-function get_query_params(key_name: string, value: any): QueryParam {
-  return [{ key: key_name, value: value }]
-}
+// function get_query_params(key_name: string, value: any): QueryParam {
+//   return [{ key: key_name, value: value }]
+// }
 
-export function get_url(pokemon_name: string) {
+export function get_url(pokemon_id: string) {
   return buildCustomUrl({
     protocol: 'http',
     port: API_PORT,
     domain: API_HOST,
     path: '/pokemon',
-    queryParams: get_query_params('pokemon', pokemon_name),
+    payload: { id: pokemon_id },
     // path: '/weather',
     // queryParams: get_query_params('city_name', city_name),
   })
