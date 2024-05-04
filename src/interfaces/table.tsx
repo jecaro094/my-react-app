@@ -1,3 +1,5 @@
+import { MouseEventHandler, ChangeEventHandler } from 'react'
+
 export interface Pokemon {
   id: string
   name: string
@@ -13,6 +15,20 @@ export interface Pokemon {
   speed: number
 }
 
-export interface PokemonListProps {
+export interface TextInputProps {
+  text: string
+  label: string
+  handleChange: ChangeEventHandler<HTMLInputElement>
+}
+
+export interface NavigationButtonsProps {
+  currentPage: number
+  totalPages: number
+  nextPage: MouseEventHandler<HTMLButtonElement>
+  prevPage: MouseEventHandler<HTMLButtonElement>
+}
+
+export interface TableProps {
   pokemons: Pokemon[] | undefined
+  columns: string[]
 }

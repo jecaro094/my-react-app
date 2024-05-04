@@ -1,4 +1,4 @@
-import { UrlParams } from '../interfaces/urlParams'
+import { UrlParams, QueryParams } from '../interfaces/urlParams'
 
 const API_PORT = '80'
 const AWS_HOST = 'Python-app-1-env.eba-yvhiu7pc.eu-west-2.elasticbeanstalk.com'
@@ -16,6 +16,19 @@ const DROPDOWN_OPTIONS_WEATHER = [
   'Barcelona',
 ]
 const DROPDOWN_OPTIONS_POKEMON = ['127', '2', '63']
+
+export const PKMN_TABLE_COLS = [
+  'sprite',
+  'name',
+  'type_1',
+  'type_2',
+  'hp',
+  'attack',
+  'special attack',
+  'defense',
+  'special defense',
+  'speed',
+]
 
 export const DROPDOWN_OPTIONS = DROPDOWN_OPTIONS_POKEMON
 
@@ -43,18 +56,13 @@ function buildCustomUrl(params: UrlParams): string {
   return url
 }
 
-// function get_query_params(key_name: string, value: any): QueryParam {
-//   return [{ key: key_name, value: value }]
-// }
-
-export function get_url(pokemon_id: string) {
+export function get_url(params: QueryParams) {
+  const { offset, limit, text } = params
   return buildCustomUrl({
     protocol: 'http',
     port: API_PORT,
     domain: API_HOST,
     path: '/pokemon',
-    payload: { id: pokemon_id },
-    // path: '/weather',
-    // queryParams: get_query_params('city_name', city_name),
+    payload: { offset: offset, limit: limit, text: text },
   })
 }

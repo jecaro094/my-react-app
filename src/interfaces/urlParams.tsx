@@ -5,3 +5,9 @@ export interface UrlParams {
   path?: string
   payload?: Record<string, string | number>
 }
+
+export interface QueryParams{
+  offset: number
+  limit: number
+  text: string
+}

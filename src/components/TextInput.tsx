@@ -1,15 +1,8 @@
 import React, { useState } from 'react'
+import { TextInputProps } from '../interfaces/table'
 
-interface TextInputProps {
-  label: string
-}
 
-const TextInput: React.FC<TextInputProps> = ({ label }) => {
-  const [text, setText] = useState('')
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value)
-  }
+const TextInput: React.FC<TextInputProps> = ({ text, label, handleChange }) => {
 
   return (
     <div>
