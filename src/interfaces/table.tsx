@@ -13,6 +13,7 @@ export interface Pokemon {
   special_attack: number
   special_defense: number
   speed: number
+  pokedex: string
 }
 
 export interface TextInputProps {
@@ -26,9 +27,11 @@ export interface NavigationButtonsProps {
   totalPages: number
   nextPage: MouseEventHandler<HTMLButtonElement>
   prevPage: MouseEventHandler<HTMLButtonElement>
+  backPage: MouseEventHandler<HTMLButtonElement> | undefined
 }
 
 export interface TableProps {
   pokemons: Pokemon[] | undefined
   columns: string[]
+  handlePokemonDetails: any
 }

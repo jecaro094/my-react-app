@@ -7,15 +7,25 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   totalPages,
   nextPage,
   prevPage,
+  backPage,
 }) => {
+  if (backPage === undefined) {
+    return (
+      <div className='myDiv'>
+        <button className='button' onClick={prevPage}>
+          Prev
+        </button>
+        <span>{`Page ${currentPage} of ${totalPages}`}</span>
+        <button className='button' onClick={nextPage}>
+          Next
+        </button>
+      </div>
+    )
+  }
   return (
     <div className='myDiv'>
-      <button className='button' onClick={prevPage}>
-        Prev
-      </button>
-      <span>{`Page ${currentPage} of ${totalPages}`}</span>
-      <button className='button' onClick={nextPage}>
-        Next
+      <button className='button' onClick={backPage}>
+        Back
       </button>
     </div>
   )

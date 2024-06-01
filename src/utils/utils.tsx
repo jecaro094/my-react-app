@@ -22,12 +22,12 @@ export const PKMN_TABLE_COLS = [
   'name',
   'type_1',
   'type_2',
-  'hp',
-  'attack',
-  'special attack',
-  'defense',
-  'special defense',
-  'speed',
+  // 'hp',
+  // 'attack',
+  // 'special attack',
+  // 'defense',
+  // 'special defense',
+  // 'speed',
 ]
 
 export const DROPDOWN_OPTIONS = DROPDOWN_OPTIONS_POKEMON

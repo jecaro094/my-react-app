@@ -1,0 +1,17 @@
+.bar-chart-container {
+    width: 50%; /* Adjust this to make the chart smaller or larger */
+    margin: 0 auto; /* Center the chart */
+}
+
+/* define a class for `pokedex` */
+.pokedex {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 30px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

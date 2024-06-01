@@ -12,7 +12,6 @@ const App: React.FC = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/chart' element={<PokemonList />} />
-          {/* <BarChart data={data} /> */}
         </Routes>
       </div>
     </Router>

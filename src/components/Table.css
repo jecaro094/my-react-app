@@ -22,6 +22,11 @@ tr:nth-child(odd) {
   background-color: #ffffff;
 }
 
+/* Style table cell hover */
+tr:hover {
+  background-color: rgb(136, 220, 231);
+}
+
 /* Style table cells */
 td {
   border: 1px solid #dddddd;
@@ -29,6 +34,6 @@ td {
 }
 
 /* Style table cell hover */
-td:hover {
+/* td:hover {
   background-color: #f0f0f0;
-}
+} */
