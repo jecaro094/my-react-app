@@ -25,10 +25,13 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push images to Amazon ECR
+    - name: Build and push Docker images
       run: |
+        aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URI }}
         docker-compose build
-        docker-compose push
+        docker tag back:latest ${{ secrets.AWS_ECR_REGISTRY_URI }}/back:latest
+        docker push ${{ secrets.AWS_ECR_REGISTRY_URI }}/back:latest
+
 
     - name: Deploy to Elastic Beanstalk
       run: |
