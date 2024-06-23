@@ -11,30 +11,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build and push Docker images
-      run: |
-        aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URI }}
-        docker-compose build
-        docker tag back:latest ${{ secrets.AWS_ECR_REGISTRY_URI }}/back:latest
-        docker push ${{ secrets.AWS_ECR_REGISTRY_URI }}/back:latest
+      - name: Build and push Docker images
+        run: |
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URI }}
+          docker-compose build
+          services=("back" "front" "db")
+          for service in "${services[@]}"; do
+            image_id=$(docker images -q $service:latest)
+            if [[ ! -z "$image_id" ]]; then
+              docker tag $image_id ${{ secrets.AWS_ECR_REGISTRY_URI }}/$service:latest
+              docker push ${{ secrets.AWS_ECR_REGISTRY_URI }}/$service:latest
+            else
+              echo "Image for $service not found"
+            fi
+          done
 
-
-    - name: Deploy to Elastic Beanstalk
-      run: |
-        eb init -r ${{ secrets.AWS_REGION }} -p docker {{ secrets.BEANSTALK_APP_NAME }}
-        eb use {{ secrets.BEANSTALK_ENV_NAME }}
-        eb deploy
+      - name: Deploy to Elastic Beanstalk
+        run: |
+          eb init -r ${{ secrets.AWS_REGION }} -p docker {{ secrets.BEANSTALK_APP_NAME }}
+          eb use {{ secrets.BEANSTALK_ENV_NAME }}
+          eb deploy
