@@ -1,15 +1,10 @@
 version: '3.9'
 
 services:
-  front:
-    build: frontend/.
+  web:
+    build: .
     ports:
-      - '3000:3000'
-
-  back:
-    build: backend/.
-    ports:
-      - '80:80'
+      - "80:80"
     depends_on:
       - db
 
@@ -21,9 +16,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
-      - ./backend/db_data:/var/lib/postgresql/data
+      - ./db_data:/var/lib/postgresql/data
 
 volumes:
-  db_data:
+  db_data:      

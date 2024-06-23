@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main  # Change this to your main branch name
-      - portfolio
+      # - portfolio
 
 jobs:
   # build:
