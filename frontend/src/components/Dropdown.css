@@ -1,0 +1,45 @@
+/* styles.css */
+
+/* Style the container of the dropdown */
+.dropdown-container {
+  position: relative;
+}
+
+/* Style the dropdown arrow */
+.dropdown-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Style the select element */
+.custom-dropdown {
+  appearance: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Style the options within the dropdown */
+.custom-dropdown option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Style the dropdown when it's open */
+.custom-dropdown:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Style the selected option */
+.custom-dropdown option:checked {
+  background-color: #007bff;
+  color: #fff;
+}

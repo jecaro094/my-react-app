@@ -1,0 +1,51 @@
+/* NavBar.css */
+.navbar {
+  background-color: #677ab4;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  background: none; /* Removes the default button background */
+  border: none; /* Removes the default button border */
+  font: inherit; /* Inherits the font from the parent */
+  cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
+  padding: 0; /* Removes the default padding */
+  margin: 0; /* Adjust as needed to match the link styling */
+  text-align: left; /* Aligns text to the left, adjust as needed */
+  display: flex; /* Aligns the text horizontally */
+  justify-content: space-between; /* Centers the text horizontally */
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 1rem;
+}
+
+.nav-link:focus {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: 2px solid #4CAF50; /* Green border */
+}
+
+.nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; 
+}
+
+/* .nav-links {
+  list-style: none;
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+} */
+
