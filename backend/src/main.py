@@ -35,6 +35,7 @@ def define_random_list(list_size):
         returned_list.append(random.randint(0, 9))
     return returned_list
 
+
 @app.post("/logout")
 async def logout(response: Response):
     response.delete_cookie(key="access_token")
@@ -54,9 +55,9 @@ async def login(response: Response, form_data: EmailPasswordForm):
     response.set_cookie(
         key="access_token",
         value=f"Bearer {access_token}",
-        httponly=True, 
+        httponly=True,
         samesite="None",  # Use 'Lax' for most scenarios, 'None' if cross-site
-        secure=False      # Don't set Secure attribute for HTTP
+        secure=False,  # Don't set Secure attribute for HTTP
     )
     return {"message": "Login successful"}
 

@@ -3,7 +3,7 @@ from typing import Optional
 
 import bcrypt
 import jwt
-from fastapi import Depends, HTTPException, status, Request
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 
 from src.database import UnitOfWork, User, UserData
@@ -27,8 +27,11 @@ def get_token_from_cookie(request: Request) -> Optional[str]:
     token = request.cookies.get("access_token")
     # print(f"token from cookie: `{token}`")
     if not token:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authenticated")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Not authenticated"
+        )
     return token.split(" ")[1]
+
 
 def validate_token(token: str = Depends(get_token_from_cookie)):
     payload = decode_access_token(token)
