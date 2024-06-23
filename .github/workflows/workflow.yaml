@@ -28,6 +28,7 @@ jobs:
     - name: Build and push Docker images
       run: |
         aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URI }}
+        aws ecr describe-repositories --repository-names react-project_front || aws ecr create-repository --repository-name react-project_front
         docker-compose build
         docker images
         docker tag react-project_front:latest ${{ secrets.AWS_ECR_REGISTRY_URI }}/react-project_front:latest
