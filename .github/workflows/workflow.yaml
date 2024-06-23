@@ -29,7 +29,7 @@ jobs:
       run: |
         aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URI }}
         docker-compose build
-        docker-compose images
+        docker images
         docker tag react-project-front:latest ${{ secrets.AWS_ECR_REGISTRY_URI }}/react-project-front:latest
         docker push ${{ secrets.AWS_ECR_REGISTRY_URI }}/react-project-front:latest
 
