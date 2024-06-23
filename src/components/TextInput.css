@@ -43,3 +43,31 @@
   background-color: #007bff;
   color: #fff;
 }
+
+
+.text-input-container {
+  width: 300px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.text-input-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.text-input-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.text-input-container p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #666;
+}

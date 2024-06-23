@@ -5,7 +5,7 @@ import NavigationButtons from './NavigationButton'
 import TextInput from './TextInput'
 import { Pokemon } from '../interfaces/table'
 import BarChart from './BarChart'
-import './PokemonList.css';
+import './PokemonList.css'
 
 const PokemonList: React.FC = () => {
   const [pokemons, setPokemons] = useState([])
@@ -25,11 +25,15 @@ const PokemonList: React.FC = () => {
       try {
         // Make the API call with offset and limit parameters
         const url = get_url({
+          path: '/pokemon',
           offset: (currentPage - 1) * itemsPerPage,
           limit: itemsPerPage,
           text: text,
         })
-        const response: any = await fetch(url, { method: 'GET', mode: 'cors' })
+        const response: any = await fetch(url, {
+          method: 'GET',
+          credentials: 'include',
+        })
         if (!response.ok) {
           throw new Error('Failed to fetch data')
         }
@@ -92,11 +96,11 @@ const PokemonList: React.FC = () => {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: '10px' }}>
       <div>{pokemonSelected.name}</div>
       <img src={pokemonSelected.sprite} alt={pokemonSelected.name} />
-      <div className="pokedex" >{pokemonSelected.pokedex}</div>
-      <div className="bar-chart-container">
+      <div className='pokedex'>{pokemonSelected.pokedex}</div>
+      <div className='bar-chart-container'>
         <BarChart pokemon={pokemonSelected} />
       </div>
       <NavigationButtons

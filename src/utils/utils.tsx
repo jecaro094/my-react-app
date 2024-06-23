@@ -2,7 +2,7 @@ import { UrlParams, QueryParams } from '../interfaces/urlParams'
 
 const API_PORT = '80'
 const AWS_HOST = 'Python-app-1-env.eba-yvhiu7pc.eu-west-2.elasticbeanstalk.com'
-const LOCAL_HOST = '127.0.0.1'
+const LOCAL_HOST = 'localhost'
 
 const API_HOST = LOCAL_HOST
 
@@ -57,12 +57,20 @@ function buildCustomUrl(params: UrlParams): string {
 }
 
 export function get_url(params: QueryParams) {
-  const { offset, limit, text } = params
+  const { path, offset, limit, text } = params;
+  const hasPayload = offset !== undefined || limit !== undefined || text !== undefined;
+
   return buildCustomUrl({
     protocol: 'http',
     port: API_PORT,
     domain: API_HOST,
-    path: '/pokemon',
-    payload: { offset: offset, limit: limit, text: text },
-  })
+    path: path,
+    ...(hasPayload && {
+      payload: { 
+        ...(offset !== undefined && { offset: offset }),
+        ...(limit !== undefined && { limit: limit }),
+        ...(text !== undefined && { text: text }),
+      },
+    }),
+  });
 }

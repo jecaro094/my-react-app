@@ -7,7 +7,8 @@ export interface UrlParams {
 }
 
 export interface QueryParams{
-  offset: number
-  limit: number
-  text: string
+  path: string
+  offset?: number
+  limit?: number
+  text?: string
 }
