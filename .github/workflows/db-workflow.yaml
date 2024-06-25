@@ -14,22 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        path: temp
-        
-    - name: Setup sparse checkout
-      run: |
-        cd temp
-        git sparse-checkout init --cone
-        git sparse-checkout set database
-        mv database/* .
-        mv database/.* .
-        cd ..
-        mv temp/* .
-        mv temp/.* .
-        rm -rf temp
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Configure AWS Credentials
         run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set region ${{ secrets.AWS_REGION }}
