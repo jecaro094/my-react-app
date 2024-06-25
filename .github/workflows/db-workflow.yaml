@@ -27,6 +27,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.AWS_ECR_REGISTRY_URI }}/${{ secrets.ECR_REPO_NAME }}:latest database/.
           docker login -u AWS -p $(aws ecr get-login-password --region ${{ secrets.AWS_REGION }}) ${{ secrets.AWS_ECR_REGISTRY_URI }}
+          docker inspect ${{ secrets.AWS_ECR_REGISTRY_URI }}/${{ secrets.ECR_REPO_NAME }}:latest
           docker push ${{ secrets.AWS_ECR_REGISTRY_URI }}/${{ secrets.ECR_REPO_NAME }}:latest
 
       # We consider this step only to install `eb` comand in order to deploy in BEANSTALK
