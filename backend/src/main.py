@@ -111,7 +111,7 @@ async def get_pokemons(
 
 @app.get("/")
 async def root():
-    return {"random_number": define_random_list(10)}
+    return {"random_number": "changed"}
 
 
 @app.get("/weather")
