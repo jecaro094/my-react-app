@@ -1,0 +1,49 @@
+name: CI/CD Database
+
+on:
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: 3.11.6
+  BACK_DIRECTORY: db
+
+
+jobs:
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set region ${{ secrets.AWS_REGION }}
+
+      - name: Login to AWS ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ secrets.AWS_ECR_REGISTRY_URI }}/${{ secrets.ECR_REPO_NAME }}:latest db/.
+          docker login -u AWS -p $(aws ecr get-login-password --region ${{ secrets.AWS_REGION }}) ${{ secrets.AWS_ECR_REGISTRY_URI }}
+          docker push ${{ secrets.AWS_ECR_REGISTRY_URI }}/${{ secrets.ECR_REPO_NAME }}:latest
+
+      # We consider this step only to install `eb` comand in order to deploy in BEANSTALK
+      - name: Install AWS CLI and EB CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+          sudo apt-get install -y python3-pip
+          pip3 install --upgrade pip
+          pip3 install awsebcli --upgrade --user
+          echo 'export PATH="$PATH:$HOME/.local/bin"' >> $GITHUB_ENV
+
+      - name: Deploy to AWS Elastic Beanstalk
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+          eb init ${{ secrets.BEANSTALK_APP_NAME }} --region ${{ secrets.AWS_REGION }} --platform "Docker"
+          eb deploy
