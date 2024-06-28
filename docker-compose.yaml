@@ -7,7 +7,9 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - type: bind
+        source: ./config/nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
     depends_on:
       - front
     networks:
