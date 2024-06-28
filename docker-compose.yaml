@@ -1,15 +1,10 @@
 version: '3.9'
 
 services:
-
   nginx:
-    image: nginx:alpine
+    build: config/nginx/.
     ports:
       - '80:80'
-    volumes:
-      - type: bind
-        source: ./config/nginx/nginx.conf
-        target: /etc/nginx/nginx.conf
     depends_on:
       - front
     networks:
@@ -34,7 +29,6 @@ services:
 
   db:
     image: postgres:14-alpine
-    # restart: always
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
