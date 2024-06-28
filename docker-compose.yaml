@@ -4,6 +4,9 @@ services:
   nginx:
     build:
       context: ./config
+    environment:
+      # - UPSTREAM_HOST=host.docker.internal
+      - UPSTREAM_HOST=Test-env.eba-hmsbvcs5.eu-west-2.elasticbeanstalk.com
     ports:
       - '80:80'
     depends_on:
@@ -37,12 +40,9 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - ./backend/db_data:/var/lib/postgresql/data
     networks:
       - internal_network
-
-volumes:
-  db_data:
 
 networks:
   internal_network:
