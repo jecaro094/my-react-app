@@ -2,7 +2,8 @@ version: '3.9'
 
 services:
   nginx:
-    build: config/nginx/.
+    build:
+      context: ./config
     ports:
       - '80:80'
     depends_on:
@@ -36,7 +37,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./backend/db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     networks:
       - internal_network
 
