@@ -4,7 +4,7 @@ const API_PORT = '8000'
 const AWS_HOST = 'test-env.eba-hmsbvcs5.eu-west-2.elasticbeanstalk.com'
 const LOCAL_HOST = 'localhost'
 
-const API_HOST = AWS_HOST
+const API_HOST = LOCAL_HOST
 
 const DROPDOWN_OPTIONS_WEATHER = [
   'Helsinki',
