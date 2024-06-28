@@ -1,7 +1,7 @@
 import random
 from typing import List, Optional
 
-from fastapi import Depends, FastAPI, HTTPException, Query, Response, Security, status
+from fastapi import Depends, FastAPI, HTTPException, Query, Response, Security, status, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -28,6 +28,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+router = APIRouter()
 
 def define_random_list(list_size):
     returned_list = []
@@ -36,13 +37,13 @@ def define_random_list(list_size):
     return returned_list
 
 
-@app.post("/logout")
+@router.post("/logout")
 async def logout(response: Response):
     response.delete_cookie(key="access_token")
     return {"message": "Logged out successfully"}
 
 
-@app.post("/token")
+@router.post("/token")
 async def login(response: Response, form_data: EmailPasswordForm):
     user = authenticate_user(form_data.email, form_data.password)
     if not user:
@@ -62,7 +63,7 @@ async def login(response: Response, form_data: EmailPasswordForm):
     return {"message": "Login successful"}
 
 
-@app.put("/user")
+@router.put("/user")
 async def put_user_on_db(user: UserData) -> str:
     with UnitOfWork() as uow:
         uow.insert(User, user)
@@ -70,7 +71,7 @@ async def put_user_on_db(user: UserData) -> str:
     return "done"
 
 
-@app.put("/pokemon")
+@router.put("/pokemon")
 async def put_pokemon_on_db(payload: dict) -> JSONResponse:
     pokemon_id = payload.get("pokemon_id")
     with UnitOfWork() as uow:
@@ -84,7 +85,7 @@ async def put_pokemon_on_db(payload: dict) -> JSONResponse:
     )
 
 
-@app.get("/pokemon")
+@router.get("/pokemon")
 async def get_pokemons(
     offset: str = Query(...),
     limit: str = Query(...),
@@ -109,12 +110,12 @@ async def get_pokemons(
     )
 
 
-@app.get("/")
+@router.get("/")
 async def root():
     return {"random_number": "changed"}
 
 
-@app.get("/weather")
+@router.get("/weather")
 async def get_weather_(city_name: str) -> dict:
     if not city_name:
         return {}
@@ -124,3 +125,6 @@ async def get_weather_(city_name: str) -> dict:
     for temp_key in ["temp", "temp_min", "temp_max", "feels_like"]:
         weather_from_city["main"][temp_key] -= 273.15
     return weather_from_city
+
+
+app.include_router(router, prefix="/api")

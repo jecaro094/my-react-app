@@ -36,10 +36,10 @@ export const DROPDOWN_OPTIONS = DROPDOWN_OPTIONS_POKEMON
 
 // Builds custom URL based on url params, given by parameter.
 function buildCustomUrl(params: UrlParams): string {
-  const { protocol, port, domain, path = '/', payload = {} } = params
+  const { protocol, domain, path = '/', payload = {} } = params
 
   // Construct the base URL
-  let url = `${protocol}://${domain}:${port}${path}`
+  let url = `${protocol}://${domain}${path}`
 
   // Append query parameters if any
   const queryString = Object.entries(payload)
@@ -62,9 +62,9 @@ export function get_url(params: QueryParams) {
 
   return buildCustomUrl({
     protocol: 'http',
-    port: API_PORT,
+    // port: API_PORT,
     domain: API_HOST,
-    path: path,
+    path: `/api${path}`,
     ...(hasPayload && {
       payload: { 
         ...(offset !== undefined && { offset: offset }),

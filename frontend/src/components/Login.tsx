@@ -18,6 +18,7 @@ const Login = ({ onLogin }: LoginProps) => {
       const login_url = get_url({
         path: '/token',
       })
+      console.log(`login_url: '${login_url}'`)
       const response = await fetch(login_url, {
         method: 'POST',
         headers: {
