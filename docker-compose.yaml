@@ -8,8 +8,8 @@ services:
       - '80:80'
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-    # depends_on:
-    #   - front
+    depends_on:
+      - front
     # networks:
     #   - external_network
 
@@ -45,6 +45,7 @@ services:
     #   - internal_network
 
 volumes:
+  nginx_data:
   db_data:
 
 # networks:
