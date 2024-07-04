@@ -5,7 +5,7 @@ const API_PORT = '8000'
 const AWS_HOST = 'back/api'
 const LOCAL_HOST = 'localhost/api'
 
-const API_HOST = LOCAL_HOST
+const API_HOST = AWS_HOST
 
 const DROPDOWN_OPTIONS_WEATHER = [
   'Helsinki',
