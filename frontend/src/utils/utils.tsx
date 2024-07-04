@@ -1,8 +1,8 @@
 import { UrlParams, QueryParams } from '../interfaces/urlParams'
 
 const API_PORT = '8000'
-// const AWS_HOST = 'test-env.eba-hmsbvcs5.eu-west-2.elasticbeanstalk.com/api'
-const AWS_HOST = 'back/api'
+const AWS_HOST = 'test-env.eba-hmsbvcs5.eu-west-2.elasticbeanstalk.com/api'
+// const AWS_HOST = 'back/api'
 const LOCAL_HOST = 'localhost/api'
 
 const API_HOST = AWS_HOST
