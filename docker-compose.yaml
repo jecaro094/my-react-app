@@ -4,9 +4,8 @@ services:
   nginx:
     build:
       context: ./config
-    environment:
-      # - UPSTREAM_HOST=host.docker.internal
-      - UPSTREAM_HOST=Test-env.eba-hmsbvcs5.eu-west-2.elasticbeanstalk.com
+    env_file:
+      - .env
     ports:
       - '80:80'
     depends_on:
@@ -16,6 +15,8 @@ services:
 
   front:
     build: frontend/.
+    env_file:
+      - .env
     ports:
       - '3000:3000'
     networks:
@@ -23,6 +24,8 @@ services:
 
   back:
     build: backend/.
+    env_file:
+      - .env
     ports:
       - '8080:80'
     depends_on:
@@ -33,10 +36,12 @@ services:
 
   db:
     image: postgres:14-alpine
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    env_file:
+      - .env
+    # environment:
+    #   POSTGRES_DB: postgres
+    #   POSTGRES_USER: postgres
+    #   POSTGRES_PASSWORD: postgres
     ports:
       - '5432:5432'
     volumes:

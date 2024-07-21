@@ -1,11 +1,10 @@
 import { UrlParams, QueryParams } from '../interfaces/urlParams'
 
-const API_PORT = '8000'
-const AWS_HOST = 'test-env.eba-hmsbvcs5.eu-west-2.elasticbeanstalk.com/api'
+const AWS_HOST = 'Test-env.eba-hmsbvcs5.eu-west-2.elasticbeanstalk.com/api'
 // const AWS_HOST = 'back/api'
 const LOCAL_HOST = 'localhost/api'
 
-const API_HOST = AWS_HOST
+const API_HOST = process.env.REACT_APP_API_HOST || LOCAL_HOST
 
 const DROPDOWN_OPTIONS_WEATHER = [
   'Helsinki',

@@ -10,6 +10,7 @@ from src.services import EmailPasswordForm, PokemonData, UserData
 from src.utils.pokebase import PokemonAPIConnector
 from src.utils.token import authenticate_user, create_access_token, validate_token
 from src.utils.weather import get_weather
+from src.config import config
 
 # db = SqlAlchemy()
 pokemonConnector = PokemonAPIConnector()
@@ -17,7 +18,7 @@ app = FastAPI()
 
 
 origins = [
-    "http://localhost:3000",  # React app running on localhost:3000
+    config.DB_CORS_URL,  # React app running on localhost:3000
 ]
 
 app.add_middleware(
