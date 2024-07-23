@@ -35,7 +35,7 @@ jobs:
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_SCHEMA: ${{ secrets.DB_SCHEMA }}
           DB_CORS_URL: ${{ secrets.DB_CORS_URL }}
-          REACT_APP_HOST: ${{ secrets.REACT_APP_HOST }}
+          REACT_APP_API_HOST: ${{ secrets.REACT_APP_API_HOST }}
         run: |
           eb init -p docker ${{ secrets.BEANSTALK_APP_NAME }} --region ${{ secrets.AWS_REGION }}
           eb use ${{ secrets.BEANSTALK_ENV_NAME }}
