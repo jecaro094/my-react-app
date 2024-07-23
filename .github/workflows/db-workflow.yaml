@@ -26,16 +26,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Create .env file
-        run: |
-          echo "UPSTREAM_HOST=${{ secrets.UPSTREAM_HOST }}" >> .env
-          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
-          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
-          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DB_SCHEMA=${{ secrets.DB_SCHEMA }}" >> .env
-          echo "DB_CORS_URL=${{ secrets.DB_CORS_URL }}" >> .env
-          echo "REACT_APP_API_HOST=${{ secrets.REACT_APP_API_HOST }}" >> .env
+      # - name: Create .env file
+      #   run: |
+      #     echo "UPSTREAM_HOST=${{ secrets.UPSTREAM_HOST }}" >> .env
+      #     echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
+      #     echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+      #     echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+      #     echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+      #     echo "DB_SCHEMA=${{ secrets.DB_SCHEMA }}" >> .env
+      #     echo "DB_CORS_URL=${{ secrets.DB_CORS_URL }}" >> .env
+      #     echo "REACT_APP_API_HOST=${{ secrets.REACT_APP_API_HOST }}" >> .env
 
       - name: Deploy to Elastic Beanstalk
         # env:
@@ -50,4 +50,12 @@ jobs:
         run: |
           eb init -p docker ${{ secrets.BEANSTALK_APP_NAME }} --region ${{ secrets.AWS_REGION }}
           eb use ${{ secrets.BEANSTALK_ENV_NAME }}
+          eb setenv UPSTREAM_HOST=${{ secrets.UPSTREAM_HOST }} \
+                    POSTGRES_DB=${{ secrets.POSTGRES_DB }} \
+                    POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
+                    POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+                    DB_PORT=${{ secrets.DB_PORT }} \
+                    DB_SCHEMA=${{ secrets.DB_SCHEMA }} \
+                    DB_CORS_URL=${{ secrets.DB_CORS_URL }} \
+                    REACT_APP_API_HOST=${{ secrets.REACT_APP_API_HOST }}
           eb deploy
