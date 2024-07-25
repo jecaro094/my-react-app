@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 
 class LocalConfig(BaseModel):
-    DB_HOST: str = Field(default_factory=lambda: os.getenv("UPSTREAM_HOST", "db")) # When running inside a container
+    DB_HOST: str = "db"
     DB_CORS_URL: str = Field(default_factory=lambda: os.getenv("DB_CORS_URL", "http://localhost:3000")) 
     # DB_HOST: str = Field(default_factory=lambda: os.getenv("DB_HOST", "localhost")) # When running as a script
     DB_PORT: str = Field(default_factory=lambda: os.getenv("DB_PORT", "5432"))
