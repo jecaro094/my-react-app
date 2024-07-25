@@ -4,8 +4,6 @@ services:
   nginx:
     build:
       context: ./config
-    environment:
-      - UPSTREAM_HOST=${UPSTREAM_HOST}
     env_file:
       - .env
     ports:
