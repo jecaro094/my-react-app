@@ -45,10 +45,14 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./backend/db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+      # - ./backend/db_data:/var/lib/postgresql/data
     networks:
       - internal_network
 
 networks:
   internal_network:
   external_network:
+
+volumes:
+  postgres_data:
