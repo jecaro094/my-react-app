@@ -1,2 +1,5 @@
-[dependencies]
-docker-compose = "latest"
+[phases.setup]
+aptPkgs = ["docker-compose"]
+
+[phases.build]
+cmds = ["docker-compose build"]
