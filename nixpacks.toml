@@ -1,5 +1,5 @@
 [dependencies]
 docker-compose = "latest"
 
-[phases]
-build = "docker-compose build"
+[phases.build]
+cmds = ["docker-compose build"]
