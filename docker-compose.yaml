@@ -4,8 +4,8 @@ services:
   nginx:
     build:
       context: ./config
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     ports:
       - '80:80'
     depends_on:
@@ -15,8 +15,8 @@ services:
 
   front:
     build: frontend/.
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     ports:
       - '3000:3000'
     networks:
@@ -24,8 +24,8 @@ services:
 
   back:
     build: backend/.
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     ports:
       - '8080:80'
     depends_on:
@@ -36,8 +36,8 @@ services:
 
   db:
     image: postgres:14-alpine
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
