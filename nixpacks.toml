@@ -1,3 +1,5 @@
+[dependencies]
+docker-compose = "latest"
+
 [phases]
-setup = "apt-get update && apt-get install -y docker-compose"
 build = "docker-compose build"
