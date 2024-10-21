@@ -57,8 +57,8 @@ async def login(response: Response, form_data: EmailPasswordForm):
     response.set_cookie(
         key="access_token",
         value=f"Bearer {access_token}",
-        httponly=True,
-        samesite="None",  # Use 'Lax' for most scenarios, 'None' if cross-site
+        httponly=False,
+        samesite="Lax",  # Use 'Lax' for most scenarios, 'None' if cross-site
         secure=False,  # Don't set Secure attribute for HTTP
     )
     return {"message": "Login successful"}
