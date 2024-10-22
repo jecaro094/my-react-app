@@ -5,14 +5,7 @@ services:
     build: .
     ports:
       - "8000:8000"
-    depends_on:
-      - db
     environment:
-      POSTGRES_URL: jdbc:postgresql://localhost:5432/conference_app
+      POSTGRES_URL: jdbc:postgresql://host.docker.internal:5432/conference_app
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Welcome
-
-  db:
-    container_name: postgres-demo
-    ports:
-      - "5432:5432"

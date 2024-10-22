@@ -32,3 +32,8 @@ yarn-error.log*
 /backend/db_data
 /backend/src/.env
 *.pyc
+
+# backend 2
+*.class
+.idea
+target/
